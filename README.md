@@ -21,6 +21,6 @@ An Automated Publication Summarizer for Faculty Members' Profile Building
 <img src="./resources/summary.png"/>
 
 ## Technical Set-up
-1. Implemented python for web scraping logic, handling extracted data, and utilizing libraries like Selenium, BeautifulSoup, langchain, and requests. Used Selenium WebDriver to extract dynamic content, including interacting with elements, and clicking buttons for complete data retrieval.
+1. Implemented Python 3.12.1 for web scraping logic, handling extracted data, and utilizing libraries like Selenium, BeautifulSoup, langchain, and requests. Used **Selenium WebDriver** to extract dynamic content, including interacting with elements, and clicking buttons for complete data retrieval.
 2. To get started we first need to get an API_KEY from here: https://console.groq.com/keys. Inside `.env` update the value of `GROQ_API_KEY` with the API_KEY you created.
 
