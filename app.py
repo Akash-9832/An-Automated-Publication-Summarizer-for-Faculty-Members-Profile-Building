@@ -74,7 +74,5 @@ def main():
                 delayed_driver_quit(delay=3)
             else:
                 st.error("Could not find citation URL.")
-    # st.image("https://scholar.googleusercontent.com/citations?view_op=view_photo&user=wWOOAQ8AAAAJ&citpid=4", caption="Sulekha Das")
-
 if __name__ == "__main__":
     main()
