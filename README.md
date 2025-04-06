@@ -8,7 +8,7 @@ An Automated Publication Summarizer for Faculty Members' Profile Building
 2. Automate the process of generating publication summaries for faculty members, researchers, and accrediting agencies (e.g. NBA, NAAC, AICTE) for HEIs.
 
 ## Preview
-1. Scholarly main page
+1. Scholarly main page: Just share your Google Scholar profile link to get started
 <img src="./resources/scholarly-index.png"/>
 
 2. Fetch user's basic information
