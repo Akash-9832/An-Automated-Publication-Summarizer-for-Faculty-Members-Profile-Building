@@ -5,6 +5,7 @@ import streamlit as st
 import dynamicWebScraping
 from scrapeSecondPage import scrapeCitationPage
 from groqSummarizer import generate_summary_response
+from generateSummary import generate_summary
 
 
 driver_path = Service(".\chromedriver-win32\chromedriver.exe")
@@ -61,13 +62,11 @@ def main():
             if citation_url:
                 paper_details = scrapeCitationPage(citation_url)
                 delayed_driver_quit(delay=3)
-                summary = generate_summary_response(
-                    paper_details["Title"],
-                    paper_details.get("Description", "No abstract available."),
-                    paper_details["Publication URL"]
-                )
+                publication_URL = paper_details["Publication URL"]
+                summary = generate_summary(paper_details.get("Description", "No abstract available."), 4)
                 st.markdown("### Summary:")
                 st.write(summary)
+                st.markdown(f"<a href='{publication_URL}' style='text-decoration:none;color:blue;'>Visit Journal</a>", unsafe_allow_html=True)
                 st.write("Authors: ", paper_details["Authors"])
                 st.write("Publication Date: ", paper_details["Publication date"])
                 st.write("Total citations: ", paper_details["Total Citations"])
