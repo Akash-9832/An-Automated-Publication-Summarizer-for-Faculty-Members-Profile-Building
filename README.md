@@ -24,6 +24,7 @@ An Automated Publication Summarizer for Faculty Members' Profile Building
 1. Implemented Python 3.12.1 for web scraping logic, handling extracted data, and utilizing libraries like Selenium, BeautifulSoup, langchain, and requests. Used **Selenium WebDriver** to extract dynamic content, including interacting with elements, and clicking buttons for complete data retrieval.
 2. Download latest version of [ChromeDriver](https://googlechromelabs.github.io/chrome-for-testing/)
 3. **Install necessary libraries:**
-
-      pip install selenium time beautifulsoup4 requests nltk networkx numpy transformers torch
+```
+   pip install selenium time beautifulsoup4 requests nltk networkx numpy transformers torch
+```
 
