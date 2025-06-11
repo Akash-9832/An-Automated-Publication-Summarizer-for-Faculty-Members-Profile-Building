@@ -7,7 +7,7 @@ from nltk.tokenize import sent_tokenize
 from nltk.corpus import stopwords
 from autoCompleteSentence import completeSentence
 
-
+# Return cleaned & processed sentences
 def preprocess_sentences(text):
     try:
         stopwords.words('english')
@@ -62,17 +62,11 @@ def generate_summary(input_text, top_n = 4):
     sim_matrix = gen_sim_matrix(processed, stop_words)
     sim_graph = nx.from_numpy_array(sim_matrix)
     scores = nx.pagerank(sim_graph)
-    ranked_sentences = sorted(((scores[i], s) for i, s in enumerate(original_sentences)), reverse=True)
+    ranked_sentences = sorted(((scores[i], s) for i, s in enumerate(original_sentences) if i in scores), reverse=True)
     summary = " ".join([s for _, s in ranked_sentences[:top_n]])
     return summary
 
 
 if __name__ == "__main__":
-    input_text = f"""Earlier risk assessment and identification of different diseases is the most crucial issue for avoiding and lowering their progression. The researchers typically used the statistical comparative analysis or step-by-step methods of feature selection using regression techniques to estimate the risk factors of diseases. The outcomes from these methods emphasized on individual risk factors separately. A combination of factors, however, is likely to affect the development of disease rather than just anyone alone. Genetic algorithms (GA) can be useful and efficient for searching a combination of factors for the fast diagnosis with best accuracies, especially for a large number of complex and poorly understood factors, as in the case in the prediction of disease development. Our proposed model shows the potential for the application of GA in diagnosing disease and predicting accuracy."""
-    print(generate_summary(input_text, 4))
-    # if(input_text[len(input_text) - 1] == "…"):
-    #     print(autoCompleteTask(input_text))
-    #     last_sentence = input_text.split(". ")[-1]
-    # print(last_sentence)
-
-
+    input_text = "Diagnosing cardiovascular disease (CVD) is a crucial issue in healthcare and research on machine learning. Machine-learning techniques can predict risk at an early stage of CVD based on the features of regular lifestyles and results of a few medical tests. The Framingham Heart Study dataset has 15.2% of patients with CVD, which increases the likelihood of classifying CVD patients as healthy. We create approximately equal instances of each class by over-sampling. We evaluate: (i) no over-sampling, (ii) random over-sampling of the training dataset, and (iii) over-sampling before splitting the dataset. We apply 50–50%, 66–34%, and 80–20% train-test splits and 10-fold cross-validation. We compare logistic regression (LR), Naive-Bayes (NB), support vector machine (SVM), decision tree (DT), and random forest (RF) classifiers. The comparison based on accuracy, sensitivity, specificity, area under …"
+    print("\nSummary\n", generate_summary(input_text, 4))
