@@ -11,6 +11,7 @@ def completeSentence(input_text):
     with torch.no_grad():
         output_ids = model.generate(
             input_ids,
+            do_sample=True,
             max_length=len(input_ids[0]) + 40,
             num_return_sequences=1,
             no_repeat_ngram_size=2,
@@ -31,5 +32,5 @@ def completeSentence(input_text):
 
 
 if __name__ == "__main__":
-    input_text = "World Health Organisation declared breast cancer (BC) as the most frequent suffering among women and accounted for 15 percent of all cancer deaths. Its accurate prediction is of utmost significance as it not only prevents deaths but also stops mistreatments. The conventional way of diagnosis includes the estimation of the tumor size as a sign of plausible cancer. Machine learning (ML) techniques have shown the effectiveness of predicting disease. However, the ML methods have been method centric rather than being dataset centric. In this paper, the authors introduce a dataset centric approach (DCA) deploying a genetic algorithm (GA) method to identify the features and a learning ensemble classifier algorithm to predict using the right features. Adaboost is such an approach that trains the model assigning weights to individual records rather than experimenting on the splitting of datasets alone and perform hyper-parameter optimization. The authors simulate the results by varying base classifiers ie, using logistic regression (LR), decision tree (DT), support vector machine (SVM), naive bayes (NB), random forest (RF), and 10-fold crossvalidations with a different split of the dataset as training and testing. The proposed DCA model with RF and 10-fold cross-validations demonstrated its potential with almost 100% performance in the classification results that no research could suggest so far. The DCA satisfies the underlying principles of data mining: the principle of parsimony, the principle of inclusion, the principle of discrimination, and the principle of optimality. This DCA is a democratic and unbiased ensemble approach as it allows all features"
-    print(completeSentence(input_text))
+    input_text = "Diagnosing cardiovascular disease (CVD) is a crucial issue in healthcare and research on machine learning. Machine-learning techniques can predict risk at an early stage of CVD based on the features of regular lifestyles and results of a few medical tests. The Framingham Heart Study dataset has 15.2% of patients with CVD, which increases the likelihood of classifying CVD patients as healthy. We create approximately equal instances of each class by over-sampling. We evaluate: (i) no over-sampling, (ii) random over-sampling of the training dataset, and (iii) over-sampling before splitting the dataset. We apply 50–50%, 66–34%, and 80–20% train-test splits and 10-fold cross-validation. We compare logistic regression (LR), Naive-Bayes (NB), support vector machine (SVM), decision tree (DT), and random forest (RF) classifiers. The comparison based on accuracy, sensitivity, specificity, area under"
+    print("\nCompleted Abstract\n", completeSentence(input_text))
