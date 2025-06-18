@@ -71,18 +71,27 @@ def excel_exporter(userURL):
     else:
         print(f"No new records found for user: {userName}")
 
-def view_stat():
+def view_stat(user_profile_url):
     df = pd.read_excel("researcher_db.xlsx")
-    # Group by year and count
-    df = df.dropna(subset=['year'])
-    df['year'] = df['year'].astype(int)
-    yearly_counts = df['year'].value_counts().sort_index()
-    # Plotting
+    # Ensure 'profile_url' column exists
+    if 'profile_url' not in df.columns:
+        st.error("Missing 'profile_url' column in Excel file.")
+        return
+    # Filter the DataFrame for the given user's profile URL
+    user_df = df[df['profile_url'] == user_profile_url]
+    if user_df.empty:
+        st.warning("No records found for this user.")
+        return
+    # Drop NA and convert year to integer
+    user_df = user_df.dropna(subset=['year'])
+    user_df['year'] = user_df['year'].astype(int)
+    # Count publications by year
+    yearly_counts = user_df['year'].value_counts().sort_index()
     fig, ax = plt.subplots(figsize=(10, 5))
     ax.bar(yearly_counts.index.astype(str), yearly_counts.values, color='skyblue')
     ax.set_xlabel("Year")
     ax.set_ylabel("Number of Publications")
-    ax.set_title("Year-wise Publication")
+    ax.set_title("Year-wise Publication Statistics")
     plt.xticks(rotation=45)
     plt.tight_layout()
     st.pyplot(fig)
@@ -103,6 +112,7 @@ def main():
     )
 
     if userURL and is_valid_gs_url(userURL):
+        excel_exporter(userURL)
         if st.button("Search My Papers"):
             st.session_state.userURL = userURL
             st.session_state.userInfo = dynamicWebScraping.scrape_profile_details(driver, userURL)
@@ -166,7 +176,7 @@ def main():
                                 st.error("Please enter a valid email address.")
 
             if st.button("View Stat"):
-                view_stat()
+                view_stat(userURL)
     elif userURL:
         st.error("Invalid Google Scholar Profile URL!!!")
 
